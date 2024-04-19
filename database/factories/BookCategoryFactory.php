@@ -18,6 +18,7 @@ class BookCategoryFactory extends Factory
     {
         return [
             'name' => $this->faker->unique()->randomElement(['Fiction', 'Non-Fiction', 'Science', 'Technology', 'Biography']),
+            'created_at' => time(),
         ];
     }
 }

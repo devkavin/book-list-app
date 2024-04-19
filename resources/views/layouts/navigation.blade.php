@@ -21,6 +21,9 @@
                     <x-nav-link :href="route('book-category.index')" :active="request()->routeIs('book-category.index')">
                         {{ __('Book Categories') }}
                     </x-nav-link>
+                    <x-nav-link :href="route('user.index')" :active="request()->routeIs('user.index')">
+                        {{ __('All users') }}
+                    </x-nav-link>
                 </div>
             </div>
 
@@ -83,6 +86,15 @@
         <div class="pt-2 pb-3 space-y-1">
             <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                 {{ __('Dashboard') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('book.index')" :active="request()->routeIs('book.index')">
+                {{ __('Books') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('book-category.index')" :active="request()->routeIs('book-category.index')">
+                {{ __('Book Categories') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('user.index')" :active="request()->routeIs('user.index')">
+                {{ __('All users') }}
             </x-responsive-nav-link>
         </div>
 
