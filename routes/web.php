@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BorrowController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\BookController;
 use App\Http\Controllers\UserController;
@@ -13,6 +14,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::resource('book', BookController::class);
     Route::resource('book-category', BookCategoryController::class);
     Route::resource('user', UserController::class);
+    Route::resource('borrow', BorrowController::class);
 });
 
 Route::middleware('auth')->group(function () {

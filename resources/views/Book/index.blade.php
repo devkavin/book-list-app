@@ -60,7 +60,9 @@
                             @foreach ($books as $book)
                                 <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                                     <th class="px-3 py-2">{{ $book->id }}</th>
-                                    <td class="px-3 py-2 text-nowrap">{{ $book->title }}</td>
+                                    <td class="px-3 py-2 text-nowrap text-white hover:underline">
+                                        <a href="{{ route('book.show', $book->id) }}">{{ $book->title }}</a>
+                                    </td>
                                     <td class="px-3 py-2 text-nowrap">{{ $book->author }}</td>
                                     <td class="px-3 py-2">{{ $book->category->name }}</td>
                                     <td class="px-3 py-2">{{ $book->price }}</td>

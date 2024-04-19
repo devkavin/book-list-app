@@ -32,7 +32,10 @@
                             @foreach ($book_categories as $book_category)
                                 <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                                     <th class="px-3 py-2">{{ $book_category->id }}</th>
-                                    <td class="px-3 py-2 text-nowrap">{{ $book_category->name }}</td>
+                                    <td class="px-3 py-2 text-nowrap text-white hover:underline">
+                                        <a
+                                            href="{{ route('book.index', ['book_category_id' => $book_category->id]) }}">{{ $book_category->name }}</a>
+                                    </td>
                                     <td class="px-0 py-2 text-center text-nowrap">
                                         <x-secondary-button>
                                             <a href="{{ route('book-category.edit', $book_category->id) }}">Edit</a>
