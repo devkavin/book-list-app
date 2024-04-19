@@ -13,7 +13,22 @@ class BookController extends Controller
      */
     public function index()
     {
-        //
+        $query = Book::query();
+
+        $sortField = request("sort_field", 'id');
+        $sortDirection = request("sort_direction", 'desc');
+
+        if (request("title")) {
+            $query->where("title", "like", "%" . request("title") . "%");
+        }
+        if (request("stock")) {
+            $query->where("stock", request("stock"));
+        }
+
+        $books = $query->orderBy($sortField, $sortDirection)
+            ->paginate(10)
+            ->onEachSide(1);
+        return view('book.index')->with('books', $books);
     }
 
     /**

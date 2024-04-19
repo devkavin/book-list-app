@@ -30,7 +30,7 @@ class DatabaseSeeder extends Seeder
             ->create();
 
         Book::factory()
-            ->count(10)
+            ->count(30)
             ->create();
     }
 }

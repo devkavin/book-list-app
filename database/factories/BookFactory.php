@@ -21,7 +21,8 @@ class BookFactory extends Factory
             'author' => $this->faker->name(),
             'price' => $this->faker->randomFloat(2, 10, 100),
             'stock' => $this->faker->numberBetween(0, 100),
-            'created_at' => $this->faker->dateTimeBetween('-1 year', 'now'), // 'now' is an alias for 'today'
+            'created_at' => $this->faker->time(),
+            'updated_at' => $this->faker->time(),
             'book_category_id' => $this->faker->numberBetween(1, 5),
         ];
     }
