@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\BookCategory;
 use App\Http\Requests\StoreBookCategoryRequest;
 use App\Http\Requests\UpdateBookCategoryRequest;
+use App\Http\Resources\BookCategoryResource;
 
 class BookCategoryController extends Controller
 {
@@ -13,7 +14,19 @@ class BookCategoryController extends Controller
      */
     public function index()
     {
-        //
+        $query = BookCategory::query();
+
+        $sortField = request("sort_field", 'id');
+        $sortDirection = request("sort_direction", 'desc');
+
+        $book_categories = $query->orderBy($sortField, $sortDirection)
+            ->paginate(10)
+            ->onEachSide(1);
+
+        return view('book-category.index', [
+            'book_categories' => BookCategoryResource::collection($book_categories),
+            'queryParams' => request()->query() ?: null,
+        ]);
     }
 
     /**

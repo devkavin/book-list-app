@@ -91,15 +91,3 @@
         </div>
     </div>
 </x-app-layout>
-<script>
-    document.getElementById('status-select').addEventListener('change', function(e) {
-        const queryParams = new URLSearchParams(window.location.search);
-        queryParams.set('status', e.target.value); // Update query param
-
-        // Update URL without form submission
-        history.replaceState({}, document.title, `${window.location.pathname}?${queryParams.toString()}`);
-
-        // Optional: Trigger an action based on the selected value
-        window.location.reload();
-    });
-</script>

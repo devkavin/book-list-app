@@ -20,6 +20,7 @@ class BookController extends Controller
         $query = Book::query();
 
         $categories = BookCategory::all();
+
         $sortField = request("sort_field", 'id');
         $sortDirection = request("sort_direction", 'desc');
 
