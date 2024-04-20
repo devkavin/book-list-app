@@ -34,7 +34,7 @@ class BorrowController extends Controller
         $book = Book::find($book_id);
 
         if (!$book || $book->stock <= 0) {
-            return redirect()->route('book.index')->with('error', 'Book not available!');
+            return back()->with('error', 'Book not available!');
         }
 
         $borrow = Borrow::create([
@@ -46,10 +46,10 @@ class BorrowController extends Controller
         $book->decrement('stock'); // Decrement book stock
         $book->save();
 
-        // return to view with message
-        return redirect()->route('book.index')->with('message', 'Book borrowed successfully!');
+        // return to the same page with success message
+        return back()->with('success', 'Book borrowed successfully!');
 
-        // return response()->json(['message' => 'Book borrowed successfully!', 'borrow' => $borrow], 201);
+        // return response()->json(['success' => 'Book borrowed successfully!', 'borrow' => $borrow], 201);
 
     }
 }
