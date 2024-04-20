@@ -11,7 +11,7 @@ class ReturnRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -23,7 +23,6 @@ class ReturnRequest extends FormRequest
     {
         return [
             'borrow_id' => ['required', 'integer', 'exists:borrows,id'],
-            'returned_at' => ['required', 'date'],
         ];
     }
 }

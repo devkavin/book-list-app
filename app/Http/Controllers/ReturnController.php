@@ -10,7 +10,7 @@ class ReturnController extends Controller
 {
     public function return(ReturnRequest $request)
     {
-
+        dd($request);
         $borrowId = $request->validated()['borrow_id'];
 
         $borrow = Borrow::find($borrowId);

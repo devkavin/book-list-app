@@ -5,6 +5,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\BookController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\BookCategoryController;
+use App\Http\Controllers\ReturnController;
 use Illuminate\Support\Facades\Route;
 
 Route::redirect('/', '/dashboard');
@@ -14,7 +15,10 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::resource('book', BookController::class);
     Route::resource('book-category', BookCategoryController::class);
     Route::resource('user', UserController::class);
-    Route::resource('borrow', BorrowController::class);
+    // Route::resource('borrow', BorrowController::class);
+
+    Route::post('/borrow', [BorrowController::class, 'borrow'])->name('borrow.book');
+    Route::post('/return', [ReturnController::class, 'return'])->name('return.book');
 });
 
 Route::middleware('auth')->group(function () {

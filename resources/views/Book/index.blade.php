@@ -68,9 +68,21 @@
                                     <td class="px-3 py-2">{{ $book->price }}</td>
                                     <td class="px-3 py-2">{{ $book->stock }}</td>
                                     <td class="px-0 py-2 text-center text-nowrap">
+                                        {{-- @if (Auth::user()->role == 'user') --}}
+                                        <div class="text-nowrap">
+                                            <form action="{{ route('borrow.book') }}" method="POST">
+                                                @csrf
+
+                                                <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
+                                                <input type="hidden" name="book_id" value="{{ $book->id }}">
+                                                <x-primary-button type="submit">Borrow</x-primary-button>
+                                            </form>
+                                        </div>
+                                        {{-- @elseif (Auth::user()->role == 'admin') --}}
                                         <x-secondary-button>
                                             <a href="{{ route('book.edit', $book->id) }}">Edit</a>
                                         </x-secondary-button>
+
                                         <form action="{{ route('book.destroy', $book->id) }}" method="POST"
                                             class="inline-block">
                                             @csrf
@@ -79,6 +91,7 @@
                                                 Delete
                                             </x-danger-button>
                                         </form>
+                                        {{-- @endif --}}
                                     </td>
                                 </tr>
                             @endforeach
