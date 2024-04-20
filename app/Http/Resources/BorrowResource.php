@@ -19,7 +19,7 @@ class BorrowResource extends JsonResource
             'user' => new UserResource($this->user),
             'book' => new BookResource($this->book),
             'borrowed_at' => $this->borrowed_at,
-            'returned_at' => $this->returned_at,
+            'returned_at' => $this->returned_at ?? null,
         ];
     }
 }

@@ -8,6 +8,24 @@ use App\Models\Borrow;
 
 class BorrowController extends Controller
 {
+
+    public function index()
+    {
+        $query = Borrow::query();
+
+        $sortField = request("sort_field", 'id');
+        $sortDirection = request("sort_direction", 'desc');
+
+        $borrows = $query->orderBy($sortField, $sortDirection)
+            ->paginate(10)
+            ->onEachSide(1);
+
+        return view('borrow.index', [
+            'borrows' => $borrows,
+            'queryParams' => request()->query() ?: null,
+        ]);
+    }
+
     public function borrow(BorrowRequest $request)
     {
         $user_id = $request->validated()['user_id'];
@@ -16,7 +34,7 @@ class BorrowController extends Controller
         $book = Book::find($book_id);
 
         if (!$book || $book->stock <= 0) {
-            return response()->json(['error' => 'Book unavailable for borrowing'], 422);
+            return redirect()->route('book.index')->with('error', 'Book not available!');
         }
 
         $borrow = Borrow::create([
@@ -28,6 +46,10 @@ class BorrowController extends Controller
         $book->decrement('stock'); // Decrement book stock
         $book->save();
 
-        return response()->json(['message' => 'Book borrowed successfully!', 'borrow' => $borrow], 201);
+        // return to view with message
+        return redirect()->route('book.index')->with('message', 'Book borrowed successfully!');
+
+        // return response()->json(['message' => 'Book borrowed successfully!', 'borrow' => $borrow], 201);
+
     }
 }
