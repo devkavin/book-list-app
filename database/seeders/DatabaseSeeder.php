@@ -27,6 +27,14 @@ class DatabaseSeeder extends Seeder
             'email_verified_at' => time(),
         ]);
 
+        User::factory()->create([
+            'name' => Env::get('USER_NAME'),
+            'email' => Env::get('USER_EMAIL'),
+            'role' => 'user',
+            'password' => bcrypt(Env::get('USER_PASSWORD')),
+            'email_verified_at' => time(),
+        ]);
+
         User::factory()
             ->count(10)
             ->create();
