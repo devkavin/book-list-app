@@ -15,7 +15,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::resource('book', BookController::class);
     Route::resource('book-category', BookCategoryController::class);
     Route::resource('user', UserController::class);
-    // Route::resource('borrow', BorrowController::class);
+    Route::resource('borrow', BorrowController::class);
 
     Route::post('/borrow', [BorrowController::class, 'borrow'])->name('borrow.book');
     Route::post('/return', [ReturnController::class, 'return'])->name('return.book');

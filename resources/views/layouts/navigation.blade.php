@@ -12,18 +12,39 @@
 
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                        {{ __('Dashboard') }}
-                    </x-nav-link>
-                    <x-nav-link :href="route('book.index')" :active="request()->routeIs('book.index')">
-                        {{ __('Books') }}
-                    </x-nav-link>
-                    <x-nav-link :href="route('book-category.index')" :active="request()->routeIs('book-category.index')">
-                        {{ __('Book Categories') }}
-                    </x-nav-link>
-                    <x-nav-link :href="route('user.index')" :active="request()->routeIs('user.index')">
-                        {{ __('All users') }}
-                    </x-nav-link>
+                    @if (Auth::user()->role == 'admin')
+                        <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
+                            {{ __('Dashboard') }}
+                        </x-nav-link>
+                        <x-nav-link :href="route('book.index')" :active="request()->routeIs('book.index')">
+                            {{ __('Books') }}
+                        </x-nav-link>
+                        <x-nav-link :href="route('book-category.index')" :active="request()->routeIs('book-category.index')">
+                            {{ __('Book Categories') }}
+                        </x-nav-link>
+                        <x-nav-link :href="route('borrow.index')" :active="request()->routeIs('borrow.index')">
+                            {{ __('Borrowed Books') }}
+                        </x-nav-link>
+                        <x-nav-link :href="route('user.index')" :active="request()->routeIs('user.index')">
+                            {{ __('All users') }}
+                        </x-nav-link>
+                    @else
+                        <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
+                            {{ __('Dashboard') }}
+                        </x-nav-link>
+                        <x-nav-link :href="route('book.index')" :active="request()->routeIs('book.index')">
+                            {{ __('Books') }}
+                        </x-nav-link>
+                        <x-nav-link :href="route('book-category.index')" :active="request()->routeIs('book-category.index')">
+                            {{ __('Book Categories') }}
+                        </x-nav-link>
+                        <x-nav-link :href="route('borrow.index')" :active="request()->routeIs('borrow.index')">
+                            {{ __('Borrowed Books') }}
+                        </x-nav-link>
+                        {{-- <x-nav-link :href="route('user.index')" :active="request()->routeIs('user.index')">
+                            {{ __('All users') }}
+                        </x-nav-link> --}}
+                    @endif
                 </div>
             </div>
 
@@ -93,6 +114,9 @@
             <x-responsive-nav-link :href="route('book-category.index')" :active="request()->routeIs('book-category.index')">
                 {{ __('Book Categories') }}
             </x-responsive-nav-link>
+            <x-nav-link :href="route('borrow.index')" :active="request()->routeIs('borrow.index')">
+                {{ __('Borrowed Books') }}
+            </x-nav-link>
             <x-responsive-nav-link :href="route('user.index')" :active="request()->routeIs('user.index')">
                 {{ __('All users') }}
             </x-responsive-nav-link>
