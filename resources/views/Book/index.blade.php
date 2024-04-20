@@ -3,13 +3,21 @@
 
 
         <div class="flex items-center justify-between mb-4">
-            <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-                {{ __('Books') }}
-            </h2>
-            {{-- add book --}}
-            <x-primary-button>
-                <a href="{{ route('book.create') }}">Add Book</a>
-            </x-primary-button>
+            <div class="text-left">
+
+                <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
+                    {{ __('Books') }}
+                </h2>
+            </div>
+
+            <div class="text-right">
+                <x-danger-button>
+                    <a href="{{ route('user.show', Auth::user()->id) }}">Return A Book</a>
+                </x-danger-button>
+                <x-primary-button>
+                    <a href="{{ route('book.create') }}">Add Book</a>
+                </x-primary-button>
+            </div>
         </div>
     </x-slot>
 
@@ -78,7 +86,7 @@
                                     <td class="px-3 py-2 text-nowrap">{{ $book->author }}</td>
                                     <td class="px-3 py-2">{{ $book->category->name }}</td>
                                     <td class="px-3 py-2">{{ $book->price }}</td>
-                                    <td class="px-3 py-2">{{ $book->stock }}</td>
+                                    <td class="px-3 py-2">{{ $book->stock == 0 ? 'Out of stock' : $book->stock }}</td>
                                     <td class="px-0 py-2 text-center text-nowrap">
                                         {{-- @if (Auth::user()->role == 'user') --}}
                                         <div class="text-nowrap">
@@ -87,7 +95,12 @@
 
                                                 <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
                                                 <input type="hidden" name="book_id" value="{{ $book->id }}">
-                                                <x-primary-button type="submit">Borrow</x-primary-button>
+                                                @if ($book->stock == 0)
+                                                    <x-secondary-button type="submit"
+                                                        disabled>Borrow</x-secondary-button>
+                                                @else
+                                                    <x-primary-button type="submit">Borrow</x-primary-button>
+                                                @endif
                                             </form>
                                         </div>
                                         {{-- @elseif (Auth::user()->role == 'admin') --}}

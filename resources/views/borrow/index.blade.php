@@ -57,7 +57,12 @@
 
                                                 <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
                                                 <input type="hidden" name="borrow_id" value="{{ $borrow->id }}">
-                                                <x-secondary-button type="submit">Return</x-secondary-button>
+                                                @if ($borrow->returned_at)
+                                                    <x-secondary-button type="submit"
+                                                        disabled>Return</x-secondary-button>
+                                                @else
+                                                    <x-secondary-button type="submit">Return</x-secondary-button>
+                                                @endif
                                             </form>
 
                                         </div>
