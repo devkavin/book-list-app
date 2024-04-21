@@ -7,9 +7,11 @@
                 {{ __('Book Categories') }}
             </h2>
             {{-- add book category --}}
-            <x-primary-button>
-                <a href="{{ route('book-category.create') }}">Add Book Category</a>
-            </x-primary-button>
+            @if (Auth::user()->role == 'admin')
+                <x-primary-button>
+                    <a href="{{ route('book-category.create') }}">Add Book Category</a>
+                </x-primary-button>
+            @endif
         </div>
     </x-slot>
 
