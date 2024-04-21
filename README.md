@@ -83,6 +83,14 @@ All screenshots are available in the `screenshots` folder.
 
 ![App Screenshot](https://github.com/devkavin/book-list-app/blob/main/screenshots/all-users-admin-page.png)
 
+### Add New Book Page
+
+![App Screenshot](https://github.com/devkavin/book-list-app/blob/main/screenshots/add-book-page.png)
+
+### Edit Book Page
+
+![App Screenshot](https://github.com/devkavin/book-list-app/blob/main/screenshots/book-edit-page.png)
+
 [Back to Top](#laravel-book-list-app)
 
 ## License
