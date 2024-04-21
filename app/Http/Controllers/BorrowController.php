@@ -11,10 +11,16 @@ class BorrowController extends Controller
 
     public function index()
     {
+        // for all borrows
         $query = Borrow::query();
 
         $sortField = request("sort_field", 'id');
         $sortDirection = request("sort_direction", 'desc');
+
+        $user_id = request("user_id"); // Get the user ID from the request
+        if ($user_id) {
+            $query->where('user_id', $user_id); // Filter by user ID if provided
+        }
 
         $borrows = $query->orderBy($sortField, $sortDirection)
             ->paginate(10)
