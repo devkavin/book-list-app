@@ -17,9 +17,9 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900 dark:text-gray-100">
-                    <pre>
+                    {{-- <pre>
                         {{ JSON_encode($users, JSON_PRETTY_PRINT) }}
-                    </pre>
+                    </pre> --}}
                     {{-- table --}}
                     <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
                         <thead
@@ -28,7 +28,9 @@
                                 <th class="px-3 py-3">ID</th>
                                 <th class="px-3 py-3">Name</th>
                                 <th class="px-3 py-3">Email</th>
-                                <th class="px-3 py-3">Books Borrowed</th>
+                                <th class="px-3 py-3">Borrowed Books</th>
+                                <th class="px-3 py-3">Total Borrows</th>
+                                <th class="px-3 py-3">Pending Returns</th>
                                 <th class="px-3 py-3 text-center">Actions</th>
                             </tr>
                         </thead>
@@ -40,7 +42,12 @@
                                         <a href="{{ route('user.show', $user->id) }}">{{ $user->name }}</a>
                                     </td>
                                     <td class="px-3 py-2 text-nowrap">{{ $user->email }}</td>
+                                    <td class="px-3 py-2 text-nowrap text-white hover:underline">
+                                        <a href="{{ route('borrow.index', ['user_id' => $user->id]) }}">View</a>
+                                    </td>
                                     <td class="px-3 py-2">{{ $user->borrowedBooks->count() }}</td>
+                                    <td class="px-3 py-2">
+                                        {{ $user->borrowedBooks->where('returned_at', null)->count() }}</td>
                                     <td class="px-0 py-2 text-center text-nowrap">
                                         <x-secondary-button>
                                             <a href="{{ route('user.edit', $user->id) }}">Edit</a>
