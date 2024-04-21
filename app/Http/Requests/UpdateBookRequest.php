@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Models\Book;
 use Illuminate\Foundation\Http\FormRequest;
 
 class UpdateBookRequest extends FormRequest
@@ -11,7 +12,7 @@ class UpdateBookRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +23,11 @@ class UpdateBookRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'title' => ['string', 'max:255'],
+            'author' => ['string', 'max:255'],
+            'price' => ['numeric', 'min:0'],
+            'stock' => ['integer', 'min:0'],
+            'book_category_id' => ['exists:' . Book::class . ',id'],
         ];
     }
 }

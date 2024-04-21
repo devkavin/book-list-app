@@ -9,6 +9,7 @@ use App\Http\Resources\BookCategoryResource;
 use App\Http\Resources\BookResource;
 use App\Models\BookCategory;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class BookController extends Controller
 {
@@ -47,6 +48,7 @@ class BookController extends Controller
             'books' => BookResource::collection($books),
             'categories' => BookCategoryResource::collection($categories),
             'queryParams' => request()->query() ?: null,
+            // 'can_borrow' => BookResource::collection($books)->where('stock', '<=', 0) ? true : false,
         ]);
     }
 
@@ -55,7 +57,13 @@ class BookController extends Controller
      */
     public function create()
     {
-        //
+        if (Auth::user()->role == 'admin') {
+            return view('book.create')->with([
+                'categories' => BookCategory::all()
+            ]);
+        } else {
+            abort(403, 'Unauthorized');
+        }
     }
 
     /**
@@ -63,7 +71,15 @@ class BookController extends Controller
      */
     public function store(StoreBookRequest $request)
     {
-        //
+        try {
+            $data = $request->validated();
+            Book::create($data);
+
+            return redirect()->route('book.index')->withSuccess('Book stored successfully.');
+        } catch (\Exception $e) {
+            // Handle the error here
+            return back()->withError('An error occurred while storing the book. error: ' . $e->getMessage());
+        }
     }
 
     /**
@@ -71,7 +87,16 @@ class BookController extends Controller
      */
     public function show(Book $book)
     {
-        //
+        $total_borrowed = $book->borrows->count();
+        $pending_returns = $book->borrows->where('returned_at', null)->count();
+
+        $can_borrow = $book->stock == 0 ? false : true;
+        return view('book.show')->with([
+            'book' => new BookResource($book),
+            'total_borrowed' => $total_borrowed,
+            'pending_returns' => $pending_returns,
+            'can_borrow' => $can_borrow,
+        ]);
     }
 
     /**
@@ -79,7 +104,14 @@ class BookController extends Controller
      */
     public function edit(Book $book)
     {
-        //
+        if (Auth::user()->role == 'admin') {
+            return view('book.edit')->with([
+                'book' => $book,
+                'categories' => BookCategory::all()
+            ]);
+        } else {
+            abort(403, 'Unauthorized');
+        }
     }
 
     /**
@@ -87,7 +119,15 @@ class BookController extends Controller
      */
     public function update(UpdateBookRequest $request, Book $book)
     {
-        //
+        try {
+            $data = $request->validated();
+            $book->update($data);
+
+            return redirect()->route('book.index')->withSuccess('Book updated successfully.');
+        } catch (\Exception $e) {
+            // Handle the error here
+            return back()->withError('An error occurred while updating the book. error: ' . $e->getMessage());
+        }
     }
 
     /**
@@ -95,6 +135,14 @@ class BookController extends Controller
      */
     public function destroy(Book $book)
     {
-        //
+        if (Auth::user()->role == 'admin') {
+            $title = $book->title;
+            $author = $book->author;
+            $book->delete();
+
+            return redirect()->route('book.index')->withSuccess('Book ' . $title . ' by ' . $author . ' deleted successfully.');
+        } else {
+            abort(403, 'Unauthorized');
+        }
     }
 }
