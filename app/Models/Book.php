@@ -37,9 +37,4 @@ class Book extends Model
     {
         return $this->belongsToMany(User::class, 'borrows');
     }
-
-    public function scopeAvailable($query)
-    {
-        return $query->where('stock', '>', 0);
-    }
 }
