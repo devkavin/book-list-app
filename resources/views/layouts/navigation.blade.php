@@ -22,7 +22,7 @@
                         <x-nav-link :href="route('book-category.index')" :active="request()->routeIs('book-category.index')">
                             {{ __('Book Categories') }}
                         </x-nav-link>
-                        <x-nav-link :href="route('borrow.index')" :active="request()->routeIs('borrow.index')">
+                        <x-nav-link :href="route('borrow.index', ['user_id' => Auth::user()->id])" :active="request()->routeIs('borrow.index')">
                             {{ __('Borrowed Books') }}
                         </x-nav-link>
                         <x-nav-link :href="route('user.index')" :active="request()->routeIs('user.index')">
@@ -38,7 +38,7 @@
                         <x-nav-link :href="route('book-category.index')" :active="request()->routeIs('book-category.index')">
                             {{ __('Book Categories') }}
                         </x-nav-link>
-                        <x-nav-link :href="route('borrow.index')" :active="request()->routeIs('borrow.index')">
+                        <x-nav-link :href="route('borrow.index', ['user_id' => Auth::user()->id])" :active="request()->routeIs('borrow.index')">
                             {{ __('Borrowed Books') }}
                         </x-nav-link>
                         {{-- <x-nav-link :href="route('user.index')" :active="request()->routeIs('user.index')">
@@ -114,7 +114,7 @@
             <x-responsive-nav-link :href="route('book-category.index')" :active="request()->routeIs('book-category.index')">
                 {{ __('Book Categories') }}
             </x-responsive-nav-link>
-            <x-nav-link :href="route('borrow.index')" :active="request()->routeIs('borrow.index')">
+            <x-nav-link :href="route('borrow.index', ['user_id' => Auth::user()->id])" :active="request()->routeIs('borrow.index')">
                 {{ __('Borrowed Books') }}
             </x-nav-link>
             <x-responsive-nav-link :href="route('user.index')" :active="request()->routeIs('user.index')">
