@@ -25,15 +25,6 @@ class BookController extends Controller
         $sortField = request("sort_field", 'id');
         $sortDirection = request("sort_direction", 'desc');
 
-        if (request("title")) {
-            $query->where("title", "like", "%" . request("title") . "%");
-        }
-        if (request("stock")) {
-            $query->where("stock", request("stock"));
-        }
-        if (request("price")) {
-            $query->where("price", request("price"));
-        }
         if (request("book_category_id")) {
             $query->where("book_category_id", request("book_category_id"));
         } else {
@@ -47,8 +38,6 @@ class BookController extends Controller
         return view('book.index', [
             'books' => BookResource::collection($books),
             'categories' => BookCategoryResource::collection($categories),
-            'queryParams' => request()->query() ?: null,
-            // 'can_borrow' => BookResource::collection($books)->where('stock', '<=', 0) ? true : false,
         ]);
     }
 
@@ -71,14 +60,18 @@ class BookController extends Controller
      */
     public function store(StoreBookRequest $request)
     {
-        try {
-            $data = $request->validated();
-            Book::create($data);
+        if (Auth::user()->role == 'admin') {
+            try {
+                $data = $request->validated();
+                Book::create($data);
 
-            return redirect()->route('book.index')->withSuccess('Book stored successfully.');
-        } catch (\Exception $e) {
-            // Handle the error here
-            return back()->withError('An error occurred while storing the book. error: ' . $e->getMessage());
+                return redirect()->route('book.index')->withSuccess('Book stored successfully.');
+            } catch (\Exception $e) {
+                // Handle the error here
+                return back()->withError('An error occurred while storing the book. error: ' . $e->getMessage());
+            }
+        } else {
+            abort(403, 'Unauthorized');
         }
     }
 
@@ -119,14 +112,18 @@ class BookController extends Controller
      */
     public function update(UpdateBookRequest $request, Book $book)
     {
-        try {
-            $data = $request->validated();
-            $book->update($data);
+        if (Auth::user()->role == 'admin') {
+            try {
+                $data = $request->validated();
+                $book->update($data);
 
-            return redirect()->route('book.index')->withSuccess('Book updated successfully.');
-        } catch (\Exception $e) {
-            // Handle the error here
-            return back()->withError('An error occurred while updating the book. error: ' . $e->getMessage());
+                return redirect()->route('book.index')->withSuccess('Book updated successfully.');
+            } catch (\Exception $e) {
+                // Handle the error here
+                return back()->withError('An error occurred while updating the book. error: ' . $e->getMessage());
+            }
+        } else {
+            abort(403, 'Unauthorized');
         }
     }
 
