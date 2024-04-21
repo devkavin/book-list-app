@@ -5,13 +5,15 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\BookController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\BookCategoryController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ReturnController;
 use Illuminate\Support\Facades\Route;
 
 Route::redirect('/', '/dashboard');
 
 Route::middleware(['auth', 'verified'])->group(function () {
-    Route::get('/dashboard', fn () => view('dashboard'))->name('dashboard');
+    // Route::get('/dashboard', fn () => view('dashboard'))->name('dashboard');
+    Route::get('/dashboard', [DashboardController::class, 'dashboard'])->name('dashboard');
     Route::resource('book', BookController::class);
     Route::resource('book-category', BookCategoryController::class);
     Route::resource('user', UserController::class);
