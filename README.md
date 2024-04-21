@@ -53,10 +53,16 @@ This project is a CRUD application built with Laravel to manage a list of books,
 
 ## Screenshots
 
+All screenshots are available in the `screenshots` folder.
+
+Book List Page
 ![App Screenshot](https://github.com/devkavin/book-list-app/blob/main/screenshots/books-page.png)
 
+Borrowed Books Page
 ![App Screenshot](https://github.com/devkavin/book-list-app/blob/main/screenshots/borrowd-books.png)
 
+Book Category Page
 ![App Screenshot](https://github.com/devkavin/book-list-app/blob/main/screenshots/book-category.png)
 
+All Users Admin Page
 ![App Screenshot](https://github.com/devkavin/book-list-app/blob/main/screenshots/all-users-admin-page.png)
