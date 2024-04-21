@@ -37,17 +37,24 @@
                                             href="{{ route('book.index', ['book_category_id' => $book_category->id]) }}">{{ $book_category->name }}</a>
                                     </td>
                                     <td class="px-0 py-2 text-center text-nowrap">
-                                        <x-secondary-button>
-                                            <a href="{{ route('book-category.edit', $book_category->id) }}">Edit</a>
-                                        </x-secondary-button>
-                                        <form action="{{ route('book-category.destroy', $book_category->id) }}"
-                                            method="POST" class="inline-block">
-                                            @csrf
-                                            @method('DELETE')
-                                            <x-danger-button>
-                                                Delete
-                                            </x-danger-button>
-                                        </form>
+                                        @if (Auth::user()->role == 'user')
+                                            <x-secondary-button>
+                                                <a
+                                                    href="{{ route('book.index', ['book_category_id' => $book_category->id]) }}">Filter</a>
+                                            </x-secondary-button>
+                                        @elseif (Auth::user()->role == 'admin')
+                                            <x-secondary-button>
+                                                <a href="{{ route('book-category.edit', $book_category->id) }}">Edit</a>
+                                            </x-secondary-button>
+                                            <form action="{{ route('book-category.destroy', $book_category->id) }}"
+                                                method="POST" class="inline-block">
+                                                @csrf
+                                                @method('DELETE')
+                                                <x-danger-button>
+                                                    Delete
+                                                </x-danger-button>
+                                            </form>
+                                        @endif
                                     </td>
                                 </tr>
                             @endforeach

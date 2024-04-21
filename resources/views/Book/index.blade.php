@@ -11,12 +11,18 @@
             </div>
 
             <div class="text-right">
-                <x-danger-button>
-                    <a href="{{ route('borrow.index', ['user_id' => Auth::user()->id]) }}">Return A Book</a>
-                </x-danger-button>
-                <x-primary-button>
-                    <a href="{{ route('book.create') }}">Add Book</a>
-                </x-primary-button>
+                @if (Auth::user()->role == 'user')
+                    <x-danger-button>
+                        <a href="{{ route('borrow.index', ['user_id' => Auth::user()->id]) }}">Return A Book</a>
+                    </x-danger-button>
+                @elseif (Auth::user()->role == 'admin')
+                    <x-danger-button>
+                        <a href="{{ route('borrow.index', ['user_id' => Auth::user()->id]) }}">Return A Book</a>
+                    </x-danger-button>
+                    <x-primary-button>
+                        <a href="{{ route('book.create') }}">Add Book</a>
+                    </x-primary-button>
+                @endif
             </div>
         </div>
     </x-slot>
@@ -78,25 +84,31 @@
                                         <td class="px-3 py-2">{{ $book->stock == 0 ? 'Out of stock' : $book->stock }}
                                         </td>
                                         <td class="px-0 py-2 text-center text-nowrap">
-                                            {{-- @if (Auth::user()->role == 'user') --}}
-                                            <div class="text-nowrap">
-                                                <x-borrow-form-button :book="$book" :can_borrow="$book->stock !== 0" />
-                                            </div>
-                                            {{-- @elseif (Auth::user()->role == 'admin') --}}
-                                            <x-secondary-button>
-                                                <a href="{{ route('book.edit', $book->id) }}">Edit</a>
-                                            </x-secondary-button>
+                                            @if (Auth::user()->role == 'user')
+                                                <div class="text-nowrap">
+                                                    <x-borrow-form-button :book="$book" :can_borrow="$book->stock !== 0" />
+                                                </div>
+                                            @elseif (Auth::user()->role == 'admin')
+                                                <div class="text-nowrap">
+                                                    <x-borrow-form-button :book="$book" :can_borrow="$book->stock !== 0" />
+                                                </div>
+                                                <div class="mt-4">
+                                                    <x-secondary-button>
+                                                        <a href="{{ route('book.edit', $book->id) }}">Edit</a>
+                                                    </x-secondary-button>
 
-                                            <form action="{{ route('book.destroy', $book->id) }}" method="POST"
-                                                class="inline-block"
-                                                onsubmit="return confirm('Are you sure you want to delete this book?');">
-                                                @csrf
-                                                @method('DELETE')
-                                                <x-danger-button>
-                                                    Delete
-                                                </x-danger-button>
-                                            </form>
-                                            {{-- @endif --}}
+                                                    <form action="{{ route('book.destroy', $book->id) }}"
+                                                        method="POST" class="inline-block"
+                                                        onsubmit="return confirm('Are you sure you want to delete this book?');">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <x-danger-button>
+                                                            Delete
+                                                        </x-danger-button>
+                                                </div>
+
+                                                </form>
+                                            @endif
                                         </td>
                                     </tr>
                                 @endforeach
