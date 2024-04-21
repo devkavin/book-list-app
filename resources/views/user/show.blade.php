@@ -24,8 +24,9 @@
                     {{-- <pre>
                         {{ JSON_encode($user, JSON_PRETTY_PRINT) }}
                     </pre> --}}
+                    <x-user-info-table :user="$user" />
 
-                    <div class="grid gap-1 grid-cols-2">
+                    {{-- <div class="grid gap-1 grid-cols-2">
                         <div>
                             <div>
                                 <label class="font-bold text-lg">User ID</label>
@@ -54,7 +55,7 @@
                                 <p class="mt-1">{{ $user->borrowedBooks->where('returned_at', null)->count() }}</p>
                             </div>
                         </div>
-                    </div>
+                    </div> --}}
                     <div>
 
                     </div>

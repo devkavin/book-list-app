@@ -53,7 +53,8 @@
                                             <a href="{{ route('user.edit', $user->id) }}">Edit</a>
                                         </x-secondary-button>
                                         <form action="{{ route('user.destroy', $user->id) }}" method="POST"
-                                            class="inline-block">
+                                            class="inline-block"
+                                            onsubmit="return confirm('Are you sure you want to delete this user?');">
                                             @csrf
                                             @method('DELETE')
                                             <x-danger-button>
