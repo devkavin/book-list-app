@@ -9,6 +9,8 @@ class BookCategory extends Model
 {
     use HasFactory;
 
+    protected $fillable = ['name'];
+
     public function books()
     {
         // one category can have many books (one-to-many relationship)
