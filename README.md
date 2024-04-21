@@ -1,3 +1,5 @@
+<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+
 # Laravel Book List App
 
 This project is a CRUD application built with Laravel to manage a list of books, including categories, stock updates on issuance/return, form validation, and routing.
@@ -10,10 +12,14 @@ This project is a CRUD application built with Laravel to manage a list of books,
 -   **Form Validation**: Ensures required fields and valid data for price and stock.
 -   **Laravel Ecosystem**: Utilizes Laravel's routing, ORM (Eloquent), and Blade templating.
 
+[Back to Top](#laravel-book-list-app)
+
 ## Requirements
 
 -   PHP >= 8.0
 -   Composer
+
+[Back to Top](#laravel-book-list-app)
 
 ## Installation
 
@@ -23,10 +29,14 @@ This project is a CRUD application built with Laravel to manage a list of books,
 4. Configure database credentials in `.env` file.
 5. Migrate & seed database tables: (`php artisan migrate --seed`)
 
+[Back to Top](#laravel-book-list-app)
+
 ## Run Locally
 
 -   Start the development server: (`php artisan serve`)
 -   Access the application in your browser: (`http://localhost:8000`) (or your configured port)
+
+[Back to Top](#laravel-book-list-app)
 
 ## Functionality Breakdown
 
@@ -51,18 +61,32 @@ This project is a CRUD application built with Laravel to manage a list of books,
 -   **Error Handling**: Robust error handling has been implemented to provide clear messages to users.
 -   **Authentication/Authorization**: User authentication and authorization have been implemented to restrict access to specific functionalities.
 
+[Back to Top](#laravel-book-list-app)
+
 ## Screenshots
 
 All screenshots are available in the `screenshots` folder.
 
-Book List Page
+### Book List Page
+
 ![App Screenshot](https://github.com/devkavin/book-list-app/blob/main/screenshots/books-page.png)
 
-Borrowed Books Page
+### Borrowed Books Page
+
 ![App Screenshot](https://github.com/devkavin/book-list-app/blob/main/screenshots/borrowd-books.png)
 
-Book Category Page
+### Book Category Page
+
 ![App Screenshot](https://github.com/devkavin/book-list-app/blob/main/screenshots/book-category.png)
 
-All Users Admin Page
+### All Users Admin Page
+
 ![App Screenshot](https://github.com/devkavin/book-list-app/blob/main/screenshots/all-users-admin-page.png)
+
+[Back to Top](#laravel-book-list-app)
+
+## License
+
+The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+
+[Back to Top](#laravel-book-list-app)
