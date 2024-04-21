@@ -15,7 +15,7 @@
                     <a href="{{ route('book.index') }}">Borrow A Book</a>
                 </x-primary-button>
                 <x-danger-button>
-                    <a href="{{ route('user.show', Auth::user()->id) }}">Return A Book</a>
+                    <a href="{{ route('borrow.index', ['user_id' => Auth::user()->id]) }}">Return A Book</a>
                 </x-danger-button>
             </div>
         </div>
