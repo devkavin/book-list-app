@@ -22,7 +22,6 @@
                                 <th class="px-3 py-3">Borrow ID</th>
                                 <th class="px-3 py-3">Borrowed Book Title</th>
                                 <th class="px-3 py-3">Category</th>
-                                <th class="px-3 py-3">Price $</th>
                                 <th class="px-3 py-3">Borrowed At</th>
                                 <th class="px-3 py-3">Returned At</th>
 
@@ -38,7 +37,6 @@
                                             href="{{ route('book.show', $borrow->book->id) }}">{{ $borrow->book->title }}</a>
                                     </td>
                                     <td class="px-3 py-2">{{ $borrow->book->category->name }}</td>
-                                    <td class="px-3 py-2">{{ $borrow->book->price }}</td>
                                     <td class="px-3 py-2">{{ $borrow->borrowed_at }}</td>
                                     <td class="px-3 py-2">{{ $borrow->returned_at ?? 'Not returned' }}</td>
                                     <td class="px-0 py-2 text-center text-nowrap">
