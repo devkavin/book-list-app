@@ -39,7 +39,7 @@
                                     <option value="{{ $category->id }}">{{ $category->name }}</option>
                                 @endforeach
                             </x-select-input>
-                            <x-input-error :messages="$errors->first('category')" />
+                            <x-input-error :messages="$errors->first('book_category_id')" />
                         </div>
                         <div>
                             <x-input-label for="price" :value="__('Price')" />

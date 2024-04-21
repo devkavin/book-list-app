@@ -39,18 +39,18 @@
                                         @if ($category->id == $book->book_category_id) selected @endif>{{ $category->name }}</option>
                                 @endforeach
                             </x-select-input>
-                            <x-input-error :messages="$errors->first('category')" />
+                            <x-input-error :messages="$errors->first('book_category_id')" />
                         </div>
                         <div>
                             <x-input-label for="price" :value="__('Price')" />
                             <x-text-input id="price" class="block mt-1 w-full" type="number" step="0.01"
-                                name="price" required value="{{ $book->price }}" />
+                                min="0" name="price" required value="{{ $book->price }}" />
                             <x-input-error :messages="$errors->first('price')" />
                         </div>
                         <div>
                             <x-input-label for="stock" :value="__('Stock')" />
                             <x-text-input id="stock" class="block mt-1 w-full" type="number" name="stock"
-                                required value="{{ $book->stock }}" />
+                                min="0" required value="{{ $book->stock }}" />
                             <x-input-error :messages="$errors->first('stock')" />
                         </div>
                     </div>
