@@ -80,19 +80,7 @@
                                         <td class="px-0 py-2 text-center text-nowrap">
                                             {{-- @if (Auth::user()->role == 'user') --}}
                                             <div class="text-nowrap">
-                                                <form action="{{ route('borrow.book') }}" method="POST">
-                                                    @csrf
-
-                                                    <input type="hidden" name="user_id"
-                                                        value="{{ Auth::user()->id }}">
-                                                    <input type="hidden" name="book_id" value="{{ $book->id }}">
-                                                    @if ($book->stock == 0)
-                                                        <x-secondary-button type="submit"
-                                                            disabled>Borrow</x-secondary-button>
-                                                    @else
-                                                        <x-primary-button type="submit">Borrow</x-primary-button>
-                                                    @endif
-                                                </form>
+                                                <x-borrow-form-button :book="$book" :can_borrow="$book->stock !== 0" />
                                             </div>
                                             {{-- @elseif (Auth::user()->role == 'admin') --}}
                                             <x-secondary-button>
@@ -100,7 +88,8 @@
                                             </x-secondary-button>
 
                                             <form action="{{ route('book.destroy', $book->id) }}" method="POST"
-                                                class="inline-block">
+                                                class="inline-block"
+                                                onsubmit="return confirm('Are you sure you want to delete this book?');">
                                                 @csrf
                                                 @method('DELETE')
                                                 <x-danger-button>

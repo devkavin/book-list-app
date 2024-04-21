@@ -41,7 +41,7 @@
                                     <td class="px-3 py-2">{{ $borrow->returned_at ?? 'Not returned' }}</td>
                                     <td class="px-0 py-2 text-center text-nowrap">
                                         <div class="text-nowrap">
-                                            <form action="{{ route('return.book') }}" method="POST">
+                                            {{-- <form action="{{ route('return.book') }}" method="POST">
                                                 @csrf
 
                                                 <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
@@ -52,7 +52,8 @@
                                                 @else
                                                     <x-secondary-button type="submit">Return</x-secondary-button>
                                                 @endif
-                                            </form>
+                                            </form> --}}
+                                            <x-return-form-button :borrow="$borrow" :can_return="!$borrow->returned_at" />
 
                                         </div>
                                     </td>
